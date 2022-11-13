@@ -84,6 +84,7 @@ class Auth extends BaseController
                         'role_id' => $user['role_id'],
                         'logged_in' => TRUE
                     ];
+                    session()->set($dataSession);
                     //2. Redirect Ke Halaman Role ID Masing Masing
                     if ($user['role_id'] == 1) {
                         return redirect()->to(base_url('admin'));
