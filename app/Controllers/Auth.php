@@ -15,6 +15,19 @@ class Auth extends BaseController
 
     public function index()
     {
+        if (session()->get('logged_in')) {
+            //Arahkan Ke Halaman Dia Sebelumnya
+            if (session()->get('role_id') == 1) {
+                return redirect()->to(base_url('admin'));
+            } else if (session()->get('role_id') == 2) {
+                return redirect()->to(base_url('manajemen'));
+            } else if (session()->get('role_id') == 3) {
+                return redirect()->to(base_url('staff'));
+            } else if (session()->get('role_id') == 4) {
+                return redirect()->to(base_url('konsultan'));
+            }
+        }
+
         $data = [
             'title' => 'MLBS || Login Page',
             'validation' => \Config\Services::validation()

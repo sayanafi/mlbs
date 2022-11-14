@@ -12,7 +12,9 @@
     <link rel="stylesheet" href="<?= base_url(); ?>/assets/vendors/css/vendor.bundle.base.css">
     <!-- endinject -->
     <!-- Plugin css for this page -->
-    <link rel="stylesheet" href="<?= base_url(); ?>/assets/vendors/datatables.net-bs4/dataTables.bootstrap4.css">
+    <!-- DataTable -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap4.min.css">
+    <!-- <link rel="stylesheet" href="assets/vendors/datatables.net-bs4/dataTables.bootstrap4.css"> -->
     <link rel="stylesheet" href="<?= base_url(); ?>/assets/vendors/ti-icons/css/themify-icons.css">
     <link rel="stylesheet" type="text/css" href="<?= base_url(); ?>/assets/js/select.dataTables.min.css">
     <!-- End plugin css for this page -->
@@ -48,11 +50,22 @@
     <!-- plugins:js -->
     <script src="<?= base_url(); ?>/assets/vendors/js/vendor.bundle.base.js"></script>
     <!-- endinject -->
+
+    <!-- Font Awesome -->
+    <script defer src="https://use.fontawesome.com/releases/v5.15.4/js/all.js" integrity="sha384-rOA1PnstxnOBLzCLMcre8ybwbTmemjzdNlILg8O7z1lUkLXozs4DHonlDtnE7fpc" crossorigin="anonymous"></script>
+
+    <!-- SweetAlert2 -->
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- DataTable -->
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap4.min.js"></script>
+    <script src="<?= base_url(); ?>/assets/js/myscript.js"></script>
     <!-- Plugin js for this page -->
     <script src="<?= base_url(); ?>/assets/vendors/chart.js/Chart.min.js"></script>
-    <script src="<?= base_url(); ?>/assets/vendors/datatables.net/jquery.dataTables.js"></script>
-    <script src="<?= base_url(); ?>/assets/vendors/datatables.net-bs4/dataTables.bootstrap4.js"></script>
-    <script src="<?= base_url(); ?>/assets/js/dataTables.select.min.js"></script>
+    <!-- <script src="assets/vendors/datatables.net/jquery.dataTables.js"></script>
+    <script src="assets/vendors/datatables.net-bs4/dataTables.bootstrap4.js"></script>
+    <script src="assets/js/dataTables.select.min.js"></script> -->
 
     <!-- End plugin js for this page -->
     <!-- inject:js -->

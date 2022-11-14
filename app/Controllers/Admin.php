@@ -17,6 +17,7 @@ class Admin extends BaseController
     {
         $data = [
             'title' => 'MLBS || Admin Dashboard',
+            'menu' => 'dashboard',
             'validation' => \Config\Services::validation()
         ];
 
