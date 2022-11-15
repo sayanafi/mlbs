@@ -37,3 +37,12 @@ $('.tombol-hapus').on('click',function(e){
       })
 });
 
+const swal1 = $('.user').data('user'); //Ambil Data FlashDatanya
+if ( swal1 ){
+    //Kalau Ada isinya jalankan sweetalert
+    Swal.fire({
+        title: 'Data User ',
+        text: 'Berhasil ' + swal1,
+        icon: 'success'
+    })
+}

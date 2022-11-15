@@ -3,7 +3,7 @@
 
 <div class="content-wrapper">
 
-
+    <div class="user" data-user="<?= session()->getFlashdata('user'); ?>"></div>
     <div class="row">
         <div class="col-lg-11 col-xl-10">
             <div class="page-header">
@@ -41,7 +41,7 @@
                                             } else if ($u['role_id'] == 2) {
                                                 echo '<span class="badge badge-pill badge-danger font-size-12"> Manajemen </span>';
                                             } else if ($u['role_id'] == 3) {
-                                                echo '<span class="badge badge-pill badge-primary font-size-12"> Staff </span>';
+                                                echo '<span class="badge badge-pill badge-dark font-size-12"> Staff </span>';
                                             } else if ($u['role_id'] == 4) {
                                                 echo '<span class="badge badge-pill badge-success font-size-12"> Konsultan </span>';
                                             }
@@ -78,6 +78,7 @@
 
 </div>
 
+<!-- Add User -->
 <div class="modal fade" id="tambahuser" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -138,6 +139,74 @@
         </div>
     </div>
 </div>
+<!-- End Add User -->
+
+<!-- Update User -->
+<?php foreach ($datausers as $du) : ?>
+    <div class="modal fade" id="UbahDataUser<?= $du['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <form action="<?= base_url(); ?>/usermanagement/updateUser/<?= $du['id']; ?>" method="post">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="nama">Nama</label>
+                                <input type="text" class="form-control" name="nama" id="nama" value="<?= $du['nama']; ?>" required>
+
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="username">Username</label>
+                                <input type="text" class="form-control" name="username" id="username" value="<?= $du['username']; ?>" required>
+                            </div>
+
+                        </div>
+                        <div class="form-row">
+
+                            <div class="form-group col-md-12">
+                                <label for="email">Email</label>
+                                <input type="email" class="form-control" name="email" id="email" value="<?= $du['email']; ?>" required>
+                            </div>
+
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label>Pilih Role...</label>
+                                <select class="form-control" aria-label="Default select example" id="role" name="role" required>
+                                    <option selected value="<?= $du['role_id']; ?>"><?= $du['role']; ?></option>
+                                    <?php foreach ($datarole as $dr) : ?>
+                                        <option value="<?= $dr['id']; ?>"><?= $dr['role']; ?></option>
+                                    <?php endforeach; ?>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label>Pilih Units...</label>
+                                <select class="form-control" aria-label="Default select example" id="units" name="units" required>
+                                    <option selected value="<?= $du['unit_id']; ?>"><?= $du['units']; ?></option>
+                                    <?php foreach ($dataunits as $u) : ?>
+                                        <option value="<?= $u['id']; ?>"><?= $u['units']; ?></option>
+                                    <?php endforeach; ?>
+                                </select>
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+<?php endforeach; ?>
+<!-- End Update User -->
 
 
 <?= $this->endSection(); ?>
