@@ -9,6 +9,5 @@ class UserRoleModel extends Model
     protected $table = 'user_role';
     protected $primaryKey = 'id';
 
-    protected $useTimestamps = true;
     protected $allowedFields = ['role'];
 }

@@ -4,6 +4,16 @@ $(document).ready(function () {
     
 });
 
+//Select 2
+// In your Javascript (external .js resource or <script> tag)
+$(document).ready(function() {
+  $('#kota').select2({
+    theme: 'bootstrap 4',
+    placeholder: "Pilih Role"
+  });
+  
+});
+
 //Tombol Hapus
 $('.tombol-hapus').on('click',function(e){
     //Matikan Fungsi A Hrefnya
@@ -26,3 +36,4 @@ $('.tombol-hapus').on('click',function(e){
         }
       })
 });
+

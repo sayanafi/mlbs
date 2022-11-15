@@ -5,7 +5,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Skydash Admin</title>
+    <title><?= $title; ?></title>
     <!-- plugins:css -->
     <link rel="stylesheet" href="<?= base_url(); ?>/assets/vendors/feather/feather.css">
     <link rel="stylesheet" href="<?= base_url(); ?>/assets/vendors/ti-icons/css/themify-icons.css">
@@ -18,6 +18,10 @@
     <link rel="stylesheet" href="<?= base_url(); ?>/assets/vendors/ti-icons/css/themify-icons.css">
     <link rel="stylesheet" type="text/css" href="<?= base_url(); ?>/assets/js/select.dataTables.min.css">
     <!-- End plugin css for this page -->
+
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
+
     <!-- inject:css -->
     <link rel="stylesheet" href="<?= base_url(); ?>/assets/css/vertical-layout-light/style.css">
     <!-- endinject -->
@@ -55,6 +59,7 @@
     <script defer src="https://use.fontawesome.com/releases/v5.15.4/js/all.js" integrity="sha384-rOA1PnstxnOBLzCLMcre8ybwbTmemjzdNlILg8O7z1lUkLXozs4DHonlDtnE7fpc" crossorigin="anonymous"></script>
 
     <!-- SweetAlert2 -->
+
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!-- DataTable -->
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
@@ -79,6 +84,97 @@
     <script src="<?= base_url(); ?>/assets/js/dashboard.js"></script>
     <script src="<?= base_url(); ?>/assets/js/Chart.roundedBarCharts.js"></script>
     <!-- End custom js for this page-->
+    <!-- Select 2 -->
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+
+    <script>
+        // FUNGSI FUNGSI AJAX
+
+        //Tombol Add User
+        $('.tombol-add-user').on('click', function() {
+            //Ambil Inputan User
+            let nama = $('#nama').val();
+            let username = $('#username').val();
+            let password = $('#password').val();
+            let email = $('#email').val();
+            let role = $('#role').val();
+            let units = $('#units').val();
+
+            //Cek Apakah Data nya ada
+            if (nama == '') {
+                Swal.fire({
+                    title: 'Data User ',
+                    text: 'Nama User Tidak Boleh Kosong !',
+                    icon: 'error'
+                })
+            } else if (username == '') {
+                Swal.fire({
+                    title: 'Data Username ',
+                    text: 'Username Tidak Boleh Kosong !',
+                    icon: 'error'
+                })
+            } else if (password == '') {
+                Swal.fire({
+                    title: 'Data Password ',
+                    text: 'Password Tidak Boleh Kosong !',
+                    icon: 'error'
+                })
+            } else if (email == '') {
+                Swal.fire({
+                    title: 'Data Email ',
+                    text: 'Email Tidak Boleh Kosong !',
+                    icon: 'error'
+                })
+            } else if (role == '') {
+                Swal.fire({
+                    title: 'Data Role ',
+                    text: 'Role Tidak Boleh Kosong !',
+                    icon: 'error'
+                })
+            } else if (units == '') {
+                Swal.fire({
+                    title: 'Data Units ',
+                    text: 'Units Tidak Boleh Kosong !',
+                    icon: 'error'
+                })
+            } else {
+
+                //Ajax
+                $.ajax({
+                    method: "POST",
+                    url: "<?= base_url(); ?>/usermanagement/addUser",
+                    data: {
+                        nama: nama,
+                        username: username,
+                        email: email,
+                        password: password,
+                        role: role,
+                        units: units
+
+                    },
+                    success: function(data) {
+                        if (data == "berhasil") {
+                            Swal.fire({
+                                title: 'Data User',
+                                text: 'Berhasil Add User !',
+                                icon: 'success'
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    window.location.href = "<?= base_url(); ?>/usermanagement";
+                                }
+                            })
+                        }
+
+                    }
+                });
+
+
+            }
+        });
+        //Akhir Tombol Add User
+    </script>
+
 </body>
 
 </html>
