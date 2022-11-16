@@ -113,14 +113,6 @@
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-6">
-                        <label>Pilih Role...</label>
-                        <select class="form-control" aria-label="Default select example" id="role">
-                            <?php foreach ($datarole as $dr) : ?>
-                                <option value="<?= $dr['id']; ?>"><?= $dr['role']; ?></option>
-                            <?php endforeach; ?>
-                        </select>
-                    </div>
-                    <div class="form-group col-md-6">
                         <label>Pilih Units...</label>
                         <select class="form-control" aria-label="Default select example" id="units">
                             <?php foreach ($dataunits as $du) : ?>
@@ -134,7 +126,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary tombol-add-user">Save changes</button>
+                <button type="button" class="btn btn-primary tombol-add-staff">Save changes</button>
             </div>
         </div>
     </div>
@@ -146,7 +138,7 @@
     <div class="modal fade" id="UbahDataUser<?= $du['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <form action="<?= base_url(); ?>/usermanagement/updateUser/<?= $du['id']; ?>" method="post">
+                <form action="<?= base_url(); ?>/staffmanagement/updateUser/<?= $du['id']; ?>" method="post">
                     <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -175,15 +167,6 @@
 
                         </div>
                         <div class="form-row">
-                            <div class="form-group col-md-6">
-                                <label>Pilih Role...</label>
-                                <select class="form-control" aria-label="Default select example" id="role" name="role" required>
-                                    <option selected value="<?= $du['role_id']; ?>"><?= $du['role']; ?></option>
-                                    <?php foreach ($datarole as $dr) : ?>
-                                        <option value="<?= $dr['id']; ?>"><?= $dr['role']; ?></option>
-                                    <?php endforeach; ?>
-                                </select>
-                            </div>
                             <div class="form-group col-md-6">
                                 <label>Pilih Units...</label>
                                 <select class="form-control" aria-label="Default select example" id="units" name="units" required>

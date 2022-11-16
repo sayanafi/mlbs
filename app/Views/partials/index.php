@@ -173,6 +173,124 @@
             }
         });
         //Akhir Tombol Add User
+
+        //Tombol Add Staff
+        $('.tombol-add-staff').on('click', function() {
+            //Ambil Inputan Staff
+            let nama = $('#nama').val();
+            let username = $('#username').val();
+            let password = $('#password').val();
+            let email = $('#email').val();
+            let units = $('#units').val();
+
+            //Cek Apakah Data nya ada
+            if (nama == '') {
+                Swal.fire({
+                    title: 'Data User ',
+                    text: 'Nama User Tidak Boleh Kosong !',
+                    icon: 'error'
+                })
+            } else if (username == '') {
+                Swal.fire({
+                    title: 'Data Username ',
+                    text: 'Username Tidak Boleh Kosong !',
+                    icon: 'error'
+                })
+            } else if (password == '') {
+                Swal.fire({
+                    title: 'Data Password ',
+                    text: 'Password Tidak Boleh Kosong !',
+                    icon: 'error'
+                })
+            } else if (email == '') {
+                Swal.fire({
+                    title: 'Data Email ',
+                    text: 'Email Tidak Boleh Kosong !',
+                    icon: 'error'
+                })
+            } else if (units == '') {
+                Swal.fire({
+                    title: 'Data Units ',
+                    text: 'Units Tidak Boleh Kosong !',
+                    icon: 'error'
+                })
+            } else {
+
+                //Ajax
+                $.ajax({
+                    method: "POST",
+                    url: "<?= base_url(); ?>/staffmanagement/addUser",
+                    data: {
+                        nama: nama,
+                        username: username,
+                        email: email,
+                        password: password,
+                        units: units
+
+                    },
+                    success: function(data) {
+                        if (data == "berhasil") {
+                            Swal.fire({
+                                title: 'Data User',
+                                text: 'Berhasil Add User !',
+                                icon: 'success'
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    window.location.href = "<?= base_url(); ?>/staffmanagement";
+                                }
+                            })
+                        }
+
+                    }
+                });
+
+
+            }
+        });
+        //Akhir Tombol Add Staff
+
+        //Tombol Add Unit
+        $('.tombol-add-unit').on('click', function() {
+            //Ambil Inputan Staff
+            let namaunit = $('#namaunit').val();
+
+            //Cek Apakah Data nya ada
+            if (namaunit == '') {
+                Swal.fire({
+                    title: 'Data Unit ',
+                    text: 'Nama Unit Tidak Boleh Kosong !',
+                    icon: 'error'
+                })
+            } else {
+
+                //Ajax
+                $.ajax({
+                    method: "POST",
+                    url: "<?= base_url(); ?>/unit/addUnit",
+                    data: {
+                        namaunit: namaunit
+
+                    },
+                    success: function(data) {
+                        if (data == "berhasil") {
+                            Swal.fire({
+                                title: 'Data Unit',
+                                text: 'Berhasil Add Unit !',
+                                icon: 'success'
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    window.location.href = "<?= base_url(); ?>/unit";
+                                }
+                            })
+                        }
+
+                    }
+                });
+
+
+            }
+        });
+        //Akhir Tombol Add Staff
     </script>
 
 </body>

@@ -34,17 +34,16 @@ class StaffManagement extends BaseController
         $users = $query->getResultArray();
 
         //Ambil Data User Join Dengan Units
-        $db      = \Config\Database::connect();
-        $builder = $db->table('users');
-        $builder->select('users.id as id,nama,email,is_active,units,unit_id,role_id,created_at,username');
-        $builder->join('units', 'users.unit_id = units.id');
-        $builder->where('role_id', 3);
-        $query = $builder->get();
-        $units = $query->getResultArray();
+        // $db      = \Config\Database::connect();
+        // $builder = $db->table('users');
+        // $builder->select('users.id as id,nama,email,is_active,units,unit_id,role_id,created_at,username');
+        // $builder->join('units', 'users.unit_id = units.id');
+        // $query = $builder->get();
+        // $units = $query->getResultArray();
 
         //$users = $this->usersModel->findAll();
 
-        //$units = $this->unitsModel->findAll();
+        $units = $this->unitsModel->findAll();
 
         $userRole = $this->userRoleModel->findAll();
 
@@ -69,7 +68,7 @@ class StaffManagement extends BaseController
             'email' => $this->request->getPost('email'),
             'username' => $this->request->getPost('username'),
             'password' => password_hash($this->request->getPost('password'), PASSWORD_DEFAULT),
-            'role_id' => $this->request->getPost('role'),
+            'role_id' => 3,
             'unit_id' => $this->request->getPost('units'),
             'is_active' => 1
         ])) {
@@ -85,11 +84,10 @@ class StaffManagement extends BaseController
             'nama' => $this->request->getVar('nama'),
             'email' => $this->request->getVar('email'),
             'username' => $this->request->getVar('username'),
-            'role_id' => $this->request->getVar('role'),
             'unit_id' => $this->request->getVar('units')
         ])) {
             session()->setFlashdata('user', 'Mengupdate User');
-            return redirect()->to(base_url('usermanagement'));
+            return redirect()->to(base_url('staffmanagement'));
         }
     }
 
@@ -98,7 +96,7 @@ class StaffManagement extends BaseController
         //Hapus Data
         if ($this->usersModel->delete($id)) {
             session()->setFlashdata('user', 'Menghapus User');
-            return redirect()->to(base_url('usermanagement'));
+            return redirect()->to(base_url('staffmanagement'));
         }
     }
 }

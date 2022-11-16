@@ -103,7 +103,7 @@
                 </ul>
             </div>
         </li>
-        <li class="nav-item">
+        <li class="nav-item <?= ($menu == 'unit') ? 'active' : ''; ?>">
             <a class="nav-link" data-toggle="collapse" href="#unit" aria-expanded="false" aria-controls="unit">
                 <i class="icon-ban menu-icon"></i>
                 <span class="menu-title">Unit</span>
@@ -111,7 +111,7 @@
             </a>
             <div class="collapse" id="unit">
                 <ul class="nav flex-column sub-menu">
-                    <li class="nav-item"> <a class="nav-link" href="pages/samples/error-404.html"> List Unit </a></li>
+                    <li class="nav-item"> <a class="nav-link" href="<?= base_url(); ?>/unit"> List Unit </a></li>
 
                 </ul>
             </div>

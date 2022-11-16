@@ -33,16 +33,16 @@ class UserManagement extends BaseController
         $users = $query->getResultArray();
 
         //Ambil Data User Join Dengan Units
-        $db      = \Config\Database::connect();
-        $builder = $db->table('users');
-        $builder->select('users.id as id,nama,email,is_active,units,unit_id,role_id,created_at,username');
-        $builder->join('units', 'users.unit_id = units.id');
-        $query = $builder->get();
-        $units = $query->getResultArray();
+        // $db      = \Config\Database::connect();
+        // $builder = $db->table('users');
+        // $builder->select('users.id as id,nama,email,is_active,units,unit_id,role_id,created_at,username');
+        // $builder->join('units', 'users.unit_id = units.id');
+        // $query = $builder->get();
+        // $units = $query->getResultArray();
 
         //$users = $this->usersModel->findAll();
 
-        //$units = $this->unitsModel->findAll();
+        $units = $this->unitsModel->findAll();
 
         $userRole = $this->userRoleModel->findAll();
 
