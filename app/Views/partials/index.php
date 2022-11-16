@@ -291,6 +291,97 @@
             }
         });
         //Akhir Tombol Add Staff
+
+        //Tombol Add inventaris
+        $('.tombol-add-inventaris').on('click', function() {
+            //Ambil Inputan Staff
+            let namabarang = $('#namabarang').val();
+            let kodebarang = $('#kodebarang').val();
+            let merk = $('#merk').val();
+            let bahan = $('#bahan').val();
+            let jumlah = $('#jumlah').val();
+            let score = $('#score').val();
+            let units = $('#units').val();
+
+            //Cek Apakah Data nya ada
+            if (namabarang == '') {
+                Swal.fire({
+                    title: 'Data Inventaris ',
+                    text: 'Nama Barang Tidak Boleh Kosong !',
+                    icon: 'error'
+                })
+            } else if (kodebarang == '') {
+                Swal.fire({
+                    title: 'Data Inventaris ',
+                    text: 'Kode Barang Tidak Boleh Kosong !',
+                    icon: 'error'
+                })
+            } else if (merk == '') {
+                Swal.fire({
+                    title: 'Data Inventaris ',
+                    text: 'Merk Tidak Boleh Kosong !',
+                    icon: 'error'
+                })
+            } else if (bahan == '') {
+                Swal.fire({
+                    title: 'Data Inventaris ',
+                    text: 'Bahan Tidak Boleh Kosong !',
+                    icon: 'error'
+                })
+            } else if (jumlah == '') {
+                Swal.fire({
+                    title: 'Data Inventaris ',
+                    text: 'Jumlah Tidak Boleh Kosong !',
+                    icon: 'error'
+                })
+            } else if (score == '') {
+                Swal.fire({
+                    title: 'Data Inventaris ',
+                    text: 'Score Tidak Boleh Kosong !',
+                    icon: 'error'
+                })
+            } else if (units == '') {
+                Swal.fire({
+                    title: 'Data Inventaris ',
+                    text: 'Units Tidak Boleh Kosong !',
+                    icon: 'error'
+                })
+            } else {
+
+                //Ajax
+                $.ajax({
+                    method: "POST",
+                    url: "<?= base_url(); ?>/inventaris/addInventaris",
+                    data: {
+                        namabarang: namabarang,
+                        kodebarang: kodebarang,
+                        merk: merk,
+                        bahan: bahan,
+                        jumlah: jumlah,
+                        score: score,
+                        units: units
+
+                    },
+                    success: function(data) {
+                        if (data == "berhasil") {
+                            Swal.fire({
+                                title: 'Data Inventaris',
+                                text: 'Berhasil Add Inventaris !',
+                                icon: 'success'
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    window.location.href = "<?= base_url(); ?>/inventaris";
+                                }
+                            })
+                        }
+
+                    }
+                });
+
+
+            }
+        });
+        //Akhir Tombol Add Staff
     </script>
 
 </body>

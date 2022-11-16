@@ -90,7 +90,7 @@
                 <span class="menu-title">User Management</span>
             </a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item <?= ($menu == 'inventaris') ? 'active' : ''; ?>">
             <a class="nav-link" data-toggle="collapse" href="#inventaris" aria-expanded="false" aria-controls="inventaris">
                 <i class="icon-paper menu-icon"></i>
                 <span class="menu-title">Inventaris</span>
@@ -98,7 +98,7 @@
             </a>
             <div class="collapse" id="inventaris">
                 <ul class="nav flex-column sub-menu">
-                    <li class="nav-item"> <a class="nav-link" href="pages/samples/error-404.html"> List Inventaris </a></li>
+                    <li class="nav-item"> <a class="nav-link" href="<?= base_url(); ?>/inventaris"> List Inventaris </a></li>
 
                 </ul>
             </div>
