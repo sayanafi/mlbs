@@ -28,7 +28,9 @@
                             <tbody>
                                 <?php foreach ($dataunits as $u) : ?>
                                     <tr>
-                                        <td><?= $u['units']; ?></td>
+                                        <td>
+                                            <?= $u['units']; ?>
+                                        </td>
                                         <td>
                                             <a href="<?= base_url(); ?>/unit/updateUnit/<?= $u['id']; ?>" class="badge badge-info" data-toggle="modal" data-target="#UbahDataUnit<?= $u['id']; ?>"><i class="fa fas fa-edit"></i></a>
                                             <a href="<?= base_url(); ?>/unit/deleteUnit/<?= $u['id']; ?>" class="badge badge-danger tombol-hapus"><i class="fa fas fa-trash"></i></a>

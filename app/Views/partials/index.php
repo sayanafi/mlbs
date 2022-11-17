@@ -381,7 +381,66 @@
 
             }
         });
-        //Akhir Tombol Add Staff
+        //Akhir Tombol Add Inventaris
+
+        //Tombol Add Standar Pelayanan
+        $('.tombol-add-sp').on('click', function() {
+            //Ambil Inputan Staff
+            let namadokumen = $('#namadokumen').val();
+            let filedokumen = $('#filedokumen').val();
+            let units = $('#units').val();
+
+
+            //Cek Apakah Data nya ada
+            if (namadokumen == '') {
+                Swal.fire({
+                    title: 'Data Dokumen ',
+                    text: 'Nama Dokumen Tidak Boleh Kosong !',
+                    icon: 'error'
+                })
+            } else if (filedokumen == '') {
+                Swal.fire({
+                    title: 'Data Dokumen ',
+                    text: 'File Dokumen Tidak Boleh Kosong !',
+                    icon: 'error'
+                })
+            } else if (units == '') {
+                Swal.fire({
+                    title: 'Data Units ',
+                    text: 'Units Tidak Boleh Kosong !',
+                    icon: 'error'
+                })
+            } else {
+
+                //Ajax
+                $.ajax({
+                    method: "POST",
+                    url: "<?= base_url(); ?>/standarpelayanan/addSP",
+                    data: {
+                        namadokumen: namadokumen,
+                        filedokumen: filedokumen,
+                        units: units
+                    },
+                    success: function(data) {
+                        if (data == "berhasil") {
+                            Swal.fire({
+                                title: 'Data Dokumen',
+                                text: 'Berhasil Add Dokumen !',
+                                icon: 'success'
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    window.location.href = "<?= base_url(); ?>/standarpelayanan";
+                                }
+                            })
+                        }
+
+                    }
+                });
+
+
+            }
+        });
+        //Akhir Tombol Add Standar Pelayanan
     </script>
 
 </body>

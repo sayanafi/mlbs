@@ -72,7 +72,7 @@
                 </ul>
             </div>
         </li>
-        <li class="nav-item">
+        <li class="nav-item <?= ($menu == 'standarpelayanan') ? 'active' : ''; ?>">
             <a class="nav-link" data-toggle="collapse" href="#standarpelayanan" aria-expanded="false" aria-controls="standarpelayanan">
                 <i class="icon-contract menu-icon"></i>
                 <span class="menu-title">Standar Pelayanan</span>
@@ -80,7 +80,7 @@
             </a>
             <div class="collapse" id="standarpelayanan">
                 <ul class="nav flex-column sub-menu">
-                    <li class="nav-item"> <a class="nav-link" href="pages/icons/mdi.html">List Dokumen</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="<?= base_url(); ?>/standarpelayanan">List Dokumen</a></li>
                 </ul>
             </div>
         </li>
