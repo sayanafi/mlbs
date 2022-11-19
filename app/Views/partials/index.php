@@ -384,29 +384,29 @@
         //Akhir Tombol Add Inventaris
 
         //Tombol Add Standar Pelayanan
-        $('.tombol-add-sp').on('click', function() {
-            //Ambil Inputan Staff
-            let namadokumen = $('#namadokumen').val();
-            let filedokumen = $('#filedokumen').val();
+        $('.tombol-add-spo').on('click', function() {
+            //Ambil Inputan Pelayanan
+            let namaspo = $('#namaspo').val();
+            let nospo = $('#nospo').val();
             let units = $('#units').val();
 
 
             //Cek Apakah Data nya ada
-            if (namadokumen == '') {
+            if (namaspo == '') {
                 Swal.fire({
-                    title: 'Data Dokumen ',
-                    text: 'Nama Dokumen Tidak Boleh Kosong !',
+                    title: 'Data SPO ',
+                    text: 'Nama SPO Tidak Boleh Kosong !',
                     icon: 'error'
                 })
-            } else if (filedokumen == '') {
+            } else if (nospo == '') {
                 Swal.fire({
-                    title: 'Data Dokumen ',
-                    text: 'File Dokumen Tidak Boleh Kosong !',
+                    title: 'Data SPO ',
+                    text: 'No SPO Tidak Boleh Kosong !',
                     icon: 'error'
                 })
             } else if (units == '') {
                 Swal.fire({
-                    title: 'Data Units ',
+                    title: 'Data SPO ',
                     text: 'Units Tidak Boleh Kosong !',
                     icon: 'error'
                 })
@@ -415,21 +415,21 @@
                 //Ajax
                 $.ajax({
                     method: "POST",
-                    url: "<?= base_url(); ?>/standarpelayanan/addSP",
+                    url: "<?= base_url(); ?>/spo/addspo",
                     data: {
-                        namadokumen: namadokumen,
-                        filedokumen: filedokumen,
+                        namaspo: namaspo,
+                        nospo: nospo,
                         units: units
                     },
                     success: function(data) {
                         if (data == "berhasil") {
                             Swal.fire({
-                                title: 'Data Dokumen',
-                                text: 'Berhasil Add Dokumen !',
+                                title: 'Data SPO',
+                                text: 'Berhasil Add SPO !',
                                 icon: 'success'
                             }).then((result) => {
                                 if (result.isConfirmed) {
-                                    window.location.href = "<?= base_url(); ?>/standarpelayanan";
+                                    window.location.href = "<?= base_url(); ?>/spo";
                                 }
                             })
                         }
@@ -441,6 +441,133 @@
             }
         });
         //Akhir Tombol Add Standar Pelayanan
+
+        //Tombol Add Standar Pelayanan
+        $('.tombol-update-profile').on('click', function() {
+            //Ambil Inputan Pelayanan
+            let nama = $('#nama').val();
+            let username = $('#username').val();
+            let email = $('#email').val();
+
+
+            //Cek Apakah Data nya ada
+            if (nama == '') {
+                Swal.fire({
+                    title: 'Data Profile ',
+                    text: 'Nama  Tidak Boleh Kosong !',
+                    icon: 'error'
+                })
+            } else if (username == '') {
+                Swal.fire({
+                    title: 'Data Profile ',
+                    text: 'Username Tidak Boleh Kosong !',
+                    icon: 'error'
+                })
+            } else if (email == '') {
+                Swal.fire({
+                    title: 'Data Profile ',
+                    text: 'Email Tidak Boleh Kosong !',
+                    icon: 'error'
+                })
+            } else {
+
+                //Ajax
+                $.ajax({
+                    method: "POST",
+                    url: "<?= base_url(); ?>/auth/updateProfile",
+                    data: {
+                        nama: nama,
+                        username: username,
+                        email: email
+                    },
+                    success: function(data) {
+                        if (data == "berhasil") {
+                            Swal.fire({
+                                title: 'Data Profile',
+                                text: 'Berhasil Update Profile, Silahkan Login Ulang !',
+                                icon: 'success'
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    window.location.href = "<?= base_url(); ?>/auth/logout";
+                                }
+                            })
+                        }
+
+                    }
+                });
+
+
+            }
+        });
+        //Akhir Tombol Add Standar Pelayanan
+
+        $('.tombol-reset-password').on('click', function() {
+            //Ambil Inputan Pelayanan
+            let passwordlama = $('#passwordlama').val();
+            let passwordbaru = $('#passwordbaru').val();
+            let konfirmasipassword = $('#konfirmasipassword').val();
+
+            //Cek Apakah Data nya ada
+            if (passwordlama == '') {
+                Swal.fire({
+                    title: 'Data Password ',
+                    text: 'Password Tidak Boleh Kosong !',
+                    icon: 'error'
+                })
+            } else if (passwordbaru == '') {
+                Swal.fire({
+                    title: 'Data Password ',
+                    text: 'New Password Tidak Boleh Kosong !',
+                    icon: 'error'
+                })
+            } else if (konfirmasipassword == '') {
+                Swal.fire({
+                    title: 'Data Password ',
+                    text: 'Re Password Tidak Boleh Kosong !',
+                    icon: 'error'
+                })
+            } else if (passwordbaru != konfirmasipassword) {
+                Swal.fire({
+                    title: 'Data Password ',
+                    text: 'New Password Dengan Re Password Tidak Sama !',
+                    icon: 'error'
+                })
+            } else {
+
+                //Ajax
+                $.ajax({
+                    method: "POST",
+                    url: "<?= base_url(); ?>/auth/resetPassword",
+                    data: {
+                        passwordlama: passwordlama,
+                        passwordbaru: passwordbaru,
+                        konfirmasipassword: konfirmasipassword
+                    },
+                    success: function(data) {
+                        if (data == "berhasil") {
+                            Swal.fire({
+                                title: 'Data Password',
+                                text: 'Berhasil Update Profile, Silahkan Login Ulang !',
+                                icon: 'success'
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    window.location.href = "<?= base_url(); ?>/auth/logout";
+                                }
+                            })
+                        } else if (data == "gagal") {
+                            Swal.fire({
+                                title: 'Data Password',
+                                text: 'Password Salah !',
+                                icon: 'error'
+                            })
+                        }
+
+                    }
+                });
+
+
+            }
+        });
     </script>
 
 </body>

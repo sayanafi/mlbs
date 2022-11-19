@@ -92,6 +92,7 @@ class Auth extends BaseController
                     //Kalau Aktif
                     // 1. Simpan sessionnya
                     $dataSession = [
+                        'id' => $user['id'],
                         'nama' => $user['nama'],
                         'username' => $user['username'],
                         'role_id' => $user['role_id'],
@@ -134,5 +135,64 @@ class Auth extends BaseController
         ];
         session()->remove($dataSession);
         return redirect()->to(base_url());
+    }
+
+    public function profile()
+    {
+
+        $users = $this->usersModel->where(['username' => session()->get('username')])->first();
+
+        if (!session()->get('logged_in')) {
+            //Arahkan Ke Halaman Dia Sebelumnya
+            return redirect()->to(base_url());
+        }
+
+        $data = [
+            'title' => 'MLBS || Profile Page',
+            'menu' => 'profile',
+            'users' => $users,
+            'validation' => \Config\Services::validation()
+        ];
+
+        return view('auth/profile', $data);
+    }
+
+    public function updateProfile()
+    {
+        //Ambil Data User Login
+        $users = $this->usersModel->where(['username' => session()->get('username')])->first();
+
+        //Update Database
+        if ($this->usersModel->save([
+            'id' => $users['id'],
+            'nama' => $this->request->getPost('nama'),
+            'username' => $this->request->getPost('username'),
+            'email' => $this->request->getPost('email')
+        ])) {
+            echo 'berhasil';
+        }
+    }
+
+    public function resetPassword()
+    {
+        $passwordlama = $this->request->getPost('passwordlama');
+        $passwordbaru = $this->request->getPost('passwordbaru');
+        $konfirmasipassword = $this->request->getPost('konfirmasipassword');
+
+        //Ambil Data User Login
+        $users = $this->usersModel->where(['username' => session()->get('username')])->first();
+
+        //Cek Apakah Passwordnya bener
+        if (password_verify($passwordlama, $users['password'])) {
+            //Update Database
+            if ($this->usersModel->save([
+                'id' => $users['id'],
+                'password' => password_hash($passwordbaru, PASSWORD_DEFAULT)
+            ])) {
+                echo 'berhasil';
+            }
+        } else {
+            echo 'gagal';
+        }
     }
 }

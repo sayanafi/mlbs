@@ -70,7 +70,7 @@ class Unit extends BaseController
         }
     }
 
-    public function deletUnit($id)
+    public function deleteUnit($id)
     {
         //Hapus Data
         if ($this->unitsModel->delete($id)) {
