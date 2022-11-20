@@ -6,7 +6,17 @@
             <div class="row">
                 <div class="col-12 col-xl-8 mb-4 mb-xl-0">
                     <h3 class="font-weight-bold">Welcome <?= session()->get('nama'); ?></h3>
-                    <h6 class="font-weight-normal mb-0">All systems are running smoothly! You have <span class="text-primary">3 unread alerts!</span></h6>
+                    <h6 class="font-weight-normal mb-0"> Anda Login Sebagai <b>
+                            <?php if (session()->get('role_id') == 1) {
+                                echo 'Admin';
+                            } else if (session()->get('role_id') == 2) {
+                                echo 'Manajemen';
+                            } else if (session()->get('role_id') == 3) {
+                                echo 'Staff';
+                            } else {
+                                echo 'Konsultan';
+                            } ?>
+                        </b> <span class="text-primary"></span></h6>
                 </div>
                 <div class="col-12 col-xl-4">
                     <div class="justify-content-end d-flex">

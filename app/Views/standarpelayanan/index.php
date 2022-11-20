@@ -8,7 +8,9 @@
         <div class="col-lg-11 col-xl-10">
             <div class="page-header">
                 <h2>Standar Pelayan </h2>
-                <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#tambahsp"><i class="fas fa-user-plus"></i> Add Standar Pelayanan</button>
+                <?php if (session()->get('role_id') == 2 and session()->get('role_id') == 3) : ?>
+                    <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#tambahsp"><i class="fas fa-user-plus"></i> Add Standar Pelayanan</button>
+                <?php endif; ?>
                 <p class="lead"></p>
 
             </div>
@@ -24,7 +26,9 @@
                                     <th>Nama Dokumen</th>
                                     <th>Unit</th>
                                     <th>File</th>
-                                    <th>Aksi</th>
+                                    <?php if (session()->get('role_id') == 2 and session()->get('role_id') == 3) : ?>
+                                        <th>Aksi</th>
+                                    <?php endif; ?>
                                 </tr>
                             </thead>
                             <tbody>
@@ -36,8 +40,10 @@
                                             <a href="<?= base_url(); ?>/standarpelayanan/download/<?= $dsp['id']; ?>" class="badge badge-primary">View File </a>
                                         </td>
                                         <td>
-                                            <a href="<?= base_url(); ?>/standarpelayanan/updateSP/<?= $dsp['id']; ?>" class="badge badge-info" data-toggle="modal" data-target="#UbahDataSp<?= $dsp['id']; ?>"><i class="fa fas fa-edit"></i></a>
-                                            <a href="<?= base_url(); ?>/standarpelayanan/deleteSP/<?= $dsp['id']; ?>" class="badge badge-danger tombol-hapus"><i class="fa fas fa-trash"></i></a>
+                                            <?php if (session()->get('role_id') == 2 and session()->get('role_id') == 3) : ?>
+                                                <a href="<?= base_url(); ?>/standarpelayanan/updateSP/<?= $dsp['id']; ?>" class="badge badge-info" data-toggle="modal" data-target="#UbahDataSp<?= $dsp['id']; ?>"><i class="fa fas fa-edit"></i></a>
+                                                <a href="<?= base_url(); ?>/standarpelayanan/deleteSP/<?= $dsp['id']; ?>" class="badge badge-danger tombol-hapus"><i class="fa fas fa-trash"></i></a>
+                                            <?php endif; ?>
                                         </td>
                                     </tr>
 

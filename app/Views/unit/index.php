@@ -8,7 +8,9 @@
         <div class="col-lg-11 col-xl-10">
             <div class="page-header">
                 <h2>List Unit </h2>
-                <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#tambahunit"><i class="fas fa-user-plus"></i> Add Unit</button>
+                <?php if (session()->get('role_id') == 2) : ?>
+                    <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#tambahunit"><i class="fas fa-user-plus"></i> Add Unit</button>
+                <?php endif; ?>
                 <p class="lead"></p>
 
             </div>
@@ -22,7 +24,9 @@
                             <thead>
                                 <tr>
                                     <th>Unit</th>
-                                    <th>Aksi</th>
+                                    <?php if (session()->get('role_id') == 2) :  ?>
+                                        <th>Aksi</th>
+                                    <?php endif; ?>
                                 </tr>
                             </thead>
                             <tbody>
@@ -32,8 +36,10 @@
                                             <?= $u['units']; ?>
                                         </td>
                                         <td>
-                                            <a href="<?= base_url(); ?>/unit/updateUnit/<?= $u['id']; ?>" class="badge badge-info" data-toggle="modal" data-target="#UbahDataUnit<?= $u['id']; ?>"><i class="fa fas fa-edit"></i></a>
-                                            <a href="<?= base_url(); ?>/unit/deleteUnit/<?= $u['id']; ?>" class="badge badge-danger tombol-hapus"><i class="fa fas fa-trash"></i></a>
+                                            <?php if (session()->get('role_id') == 2) : ?>
+                                                <a href="<?= base_url(); ?>/unit/updateUnit/<?= $u['id']; ?>" class="badge badge-info" data-toggle="modal" data-target="#UbahDataUnit<?= $u['id']; ?>"><i class="fa fas fa-edit"></i></a>
+                                                <a href="<?= base_url(); ?>/unit/deleteUnit/<?= $u['id']; ?>" class="badge badge-danger tombol-hapus"><i class="fa fas fa-trash"></i></a>
+                                            <?php endif; ?>
                                         </td>
                                     </tr>
 
