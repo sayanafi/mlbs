@@ -24,7 +24,7 @@
         <?php endif; ?>
 
         <?php if (session()->get('role_id') != 1) : ?>
-            <li class="nav-item">
+            <li class="nav-item" <?= ($menu == 'juknis') ? 'active' : ''; ?>">
                 <a class="nav-link" data-toggle="collapse" href="#juknis" aria-expanded="false" aria-controls="juknis">
                     <i class="icon-layout menu-icon"></i>
                     <span class="menu-title">Juknis</span>
@@ -32,7 +32,7 @@
                 </a>
                 <div class="collapse" id="juknis">
                     <ul class="nav flex-column sub-menu">
-                        <li class="nav-item"> <a class="nav-link" href="pages/ui-features/buttons.html">List Juknis</a></li>
+                        <li class="nav-item"> <a class="nav-link" href="<?= base_url(); ?>/juknis">List Juknis</a></li>
                         <li class="nav-item"> <a class="nav-link" href="pages/ui-features/dropdowns.html">Nilai Juknis</a></li>
                     </ul>
                 </div>

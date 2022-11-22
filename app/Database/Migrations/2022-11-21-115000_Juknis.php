@@ -54,6 +54,10 @@ class Juknis extends Migration
                 'type'           => 'VARCHAR',
                 'constraint'     => '128'
             ],
+            'file_juknis' => [
+                'type'           => 'VARCHAR',
+                'constraint'     => '128'
+            ],
             'inputan_id' => [
                 'type'           => 'INT',
                 'constraint'     => '11'
