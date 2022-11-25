@@ -568,6 +568,142 @@
 
             }
         });
+
+        $('.tombol-update-profile').on('click', function() {
+            //Ambil Inputan Pelayanan
+            let nama = $('#nama').val();
+            let username = $('#username').val();
+            let email = $('#email').val();
+
+
+            //Cek Apakah Data nya ada
+            if (nama == '') {
+                Swal.fire({
+                    title: 'Data Profile ',
+                    text: 'Nama  Tidak Boleh Kosong !',
+                    icon: 'error'
+                })
+            } else if (username == '') {
+                Swal.fire({
+                    title: 'Data Profile ',
+                    text: 'Username Tidak Boleh Kosong !',
+                    icon: 'error'
+                })
+            } else if (email == '') {
+                Swal.fire({
+                    title: 'Data Profile ',
+                    text: 'Email Tidak Boleh Kosong !',
+                    icon: 'error'
+                })
+            } else {
+
+                //Ajax
+                $.ajax({
+                    method: "POST",
+                    url: "<?= base_url(); ?>/auth/updateProfile",
+                    data: {
+                        nama: nama,
+                        username: username,
+                        email: email
+                    },
+                    success: function(data) {
+                        if (data == "berhasil") {
+                            Swal.fire({
+                                title: 'Data Profile',
+                                text: 'Berhasil Update Profile, Silahkan Login Ulang !',
+                                icon: 'success'
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    window.location.href = "<?= base_url(); ?>/auth/logout";
+                                }
+                            })
+                        }
+
+                    }
+                });
+
+
+            }
+        });
+        //Akhir Tombol Add Standar Pelayanan
+
+        $('.tombol-add-juknis').on('click', function() {
+            //Ambil Inputan Pelayanan
+            let namajuknis = $('#namajuknis').val();
+            let nojuknis = $('#nojuknis').val();
+            let tanggaldibuat = $('#tanggaldibuat').val();
+            let tanggaldisahkan = $('#tanggaldisahkan').val();
+            let pengertian = $('#pengertian').val();
+            let tujuan = $('#tujuan').val();
+            let dasarhukum = $('#dasarhukum').val();
+            let kebijakanketentuan = $('#kebijakanketentuan').val();
+            let unitpihakterkait = $('#unitpihakterkait').val();
+            let catatan = $('#catatan').val();
+            let filejuknis = $('#filejuknis').val();
+
+            //Cek Apakah Data nya ada
+            if (namajuknis == '') {
+                Swal.fire({
+                    title: 'Data Juknis ',
+                    text: 'Nama Tidak Boleh Kosong !',
+                    icon: 'error'
+                })
+            } else if (nojuknis == '') {
+                Swal.fire({
+                    title: 'Data Juknis ',
+                    text: 'No Juknis Tidak Boleh Kosong !',
+                    icon: 'error'
+                })
+            } else if (tanggaldibuat == '') {
+                Swal.fire({
+                    title: 'Data Juknis ',
+                    text: 'Tanggal Juknis Tidak Boleh Kosong !',
+                    icon: 'error'
+                })
+            } else if (tanggaldisahkan == '') {
+                Swal.fire({
+                    title: 'Data Juknis ',
+                    text: 'Tanggal Juknis Tidak Boleh Kosong !',
+                    icon: 'error'
+                })
+            } else {
+
+                //Ajax
+                $.ajax({
+                    method: "POST",
+                    url: "<?= base_url(); ?>/juknis/addJuknis",
+                    data: {
+                        namajuknis: namajuknis,
+                        nojuknis: nojuknis,
+                        tanggaldibuat: tanggaldibuat,
+                        tanggaldisahkan: tanggaldisahkan,
+                        pengertian: pengertian,
+                        tujuan: tujuan,
+                        dasarhukum: dasarhukum,
+                        kebijakanketentuan: kebijakanketentuan,
+                        unitpihakterkait: unitpihakterkait,
+                        catatan: catatan,
+                        filejuknis: filejuknis
+                    },
+                    success: function(data) {
+                        if (data == "berhasil") {
+                            Swal.fire({
+                                title: 'Data Juknis',
+                                text: 'Berhasil Di Add !',
+                                icon: 'success'
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    window.location.href = "<?= base_url(); ?>/juknis";
+                                }
+                            })
+                        }
+
+                    }
+                });
+
+
+            }
+        });
     </script>
 
 </body>

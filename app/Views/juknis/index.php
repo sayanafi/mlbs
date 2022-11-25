@@ -32,7 +32,7 @@
                             <tbody>
                                 <?php foreach ($datajuknis as $dj) : ?>
                                     <tr>
-                                        <td><?= $dj['nama_barang']; ?></td>
+                                        <td><?= $dj['nama_juknis']; ?></td>
                                         <td>
                                             <button class="badge badge-dark"><?= $dj['no_juknis']; ?></button>
                                         </td>
@@ -63,60 +63,78 @@
 <div class="modal fade" id="tambahjuknis" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label for="nama">Nama Barang</label>
-                        <input type="text" class="form-control" id="namabarang" placeholder="Masukkan Nama Barang...">
+            <form action="<?= base_url(); ?>/juknis/addJuknis" method="post" enctype="multipart/form-data">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Add Juknis</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <label for="nama">Nama Juknis</label>
+                            <input type="text" class="form-control" name="namajuknis" id="namajuknis" placeholder="Masukkan Nama Juknis...">
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="nojuknis">No Juknis</label>
+                            <input type="text" class="form-control" name="nojuknis" id="nojuknis" placeholder="Masukkan No Juknis...">
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="tanggaldibuat">Tanggal Dibuat</label>
+                            <input type="date" class="form-control" name="tanggaldibuat" id="tanggaldibuat">
+                        </div>
+
                     </div>
-                    <div class="form-group col-md-6">
-                        <label for="username">Kode Barang</label>
-                        <input type="text" class="form-control" id="kodebarang" placeholder="Masukkan Kode Barang...">
+                    <div class=" form-row">
+                        <div class="form-group col-md-4">
+                            <label for="tanggaldisahkan">Tanggal Disahkan</label>
+                            <input type="date" class="form-control" name="tanggaldisahkan" id="tanggaldisahkan">
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="pengertian">Pengertian</label>
+                            <textarea class="form-control" name="pengertian" id="pengertian"></textarea>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="pengertian">Tujuan</label>
+                            <textarea class="form-control" name="tujuan" id="tujuan"></textarea>
+                        </div>
+
+                    </div>
+                    <div class=" form-row">
+                        <div class="form-group col-md-4">
+                            <label for="dasarhukum">Dasar Hukum</label>
+                            <textarea class="form-control" name="dasarhukum" id="dasarhukum"></textarea>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="kebijakanketentuan">Kebijakan / Ketentuan</label>
+                            <textarea class="form-control" name="kebijakanketentuan" id="kebijakanketentuan"></textarea>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="kebijakanketentuan">Unit / Pihak Terkait</label>
+                            <textarea class="form-control" name="unitpihakterkait" id="unitpihakterkait"></textarea>
+                        </div>
+
+                    </div>
+                    <div class=" form-row">
+                        <div class="form-group col-md-6">
+                            <label for="catatan ">Catatan</label>
+                            <textarea class="form-control" name="catatan" id="catatan"></textarea>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="email">File Dokumen</label>
+                            <input type="file" class="form-control" id="filejuknis" name="filejuknis">
+
+                        </div>
+
                     </div>
 
                 </div>
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label for="password">Merk</label>
-                        <input type="text" class="form-control" id="merk" placeholder="Masukkan Merk...">
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label for="email">Bahan</label>
-                        <input type="text" class="form-control" id="bahan" placeholder="Masukkan Bahan...">
-                    </div>
-
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save changes</button>
                 </div>
-                <div class="form-row">
-                    <div class="form-group col-md-4">
-                        <label for="password">Jumlah</label>
-                        <input type="text" class="form-control" id="jumlah" placeholder="Masukkan Jumlah...">
-                    </div>
-                    <div class="form-group col-md-4">
-                        <label for="email">Score</label>
-                        <input type="text" class="form-control" id="score" placeholder="Masukkan Score...">
-                    </div>
-                    <div class="form-group col-md-4">
-                        <label>Pilih Units...</label>
-                        <select class="form-control" aria-label="Default select example" id="units">
-                            <?php foreach ($dataunits as $du) : ?>
-                                <option value="<?= $du['id']; ?>"><?= $du['units']; ?></option>
-                            <?php endforeach; ?>
-                        </select>
-                    </div>
-
-                </div>
-
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary tombol-add-juknis">Save changes</button>
-            </div>
+            </form>
         </div>
     </div>
 </div>

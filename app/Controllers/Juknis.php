@@ -31,12 +31,15 @@ class Juknis extends BaseController
         }
 
         //Ambil Data Inventaris Join Dengan Units
-        $db      = \Config\Database::connect();
-        $builder = $db->table('juknis');
-        $builder->select('*,juknis.id as id');
-        $builder->join('inputan_juknis', 'juknis.inputan_id = inputan_juknis.id');
-        $query = $builder->get();
-        $juknis = $query->getResultArray();
+        // $db      = \Config\Database::connect();
+        // $builder = $db->table('juknis');
+        // $builder->select('*,juknis.id as id');
+        // $builder->join('inputan_juknis', 'juknis.id = inputan_juknis.id_juknis');
+        // $query = $builder->get();
+        // $juknis = $query->getResultArray();
+
+        //Data Juknis
+        $juknis = $this->juknisModel->findAll();
         $units = $this->unitsModel->findAll();
 
 
@@ -51,19 +54,32 @@ class Juknis extends BaseController
         return view('juknis/index', $data);
     }
 
-    public function addInventaris()
+    public function addJuknis()
     {
+
+        //Tangkap File Nya
+        $file = $this->request->getFile('filejuknis');
+        //Generate File Random
+        $namaFile = $file->getRandomName();
+        //Masukkan File Ke Folder
+        $file->move('assets/juknis', $namaFile);
+
         //Masukkan Ke Database
-        if ($this->inventarisModel->save([
-            'nama_barang' => $this->request->getPost('namabarang'),
-            'kode_barang' => $this->request->getPost('kodebarang'),
-            'merk' => $this->request->getPost('merk'),
-            'bahan' => $this->request->getPost('bahan'),
-            'jumlah' => $this->request->getPost('jumlah'),
-            'score' => $this->request->getPost('score'),
-            'unit_id' => $this->request->getPost('units')
+        if ($this->juknisModel->save([
+            'nama_juknis' => $this->request->getVar('namajuknis'),
+            'no_juknis' => $this->request->getVar('nojuknis'),
+            'tanggal_dibuat' => $this->request->getVar('tanggaldibuat'),
+            'tanggal_disahkan' => $this->request->getVar('tanggaldisahkan'),
+            'pengertian' => $this->request->getVar('pengertian'),
+            'dasar_hukum' => $this->request->getVar('dasarhukum'),
+            'kebijakan_ketentuan' => $this->request->getVar('kebijakanketentuan'),
+            'unit_pihakterkait' => $this->request->getVar('unitpihakterkait'),
+            'catatan' => $this->request->getVar('catatan'),
+            'file_juknis' => $namaFile,
+            'user_created' => session()->get('nama')
         ])) {
-            echo 'berhasil';
+            session()->setFlashdata('user', 'Add Juknis');
+            return redirect()->to(base_url('juknis'));
         }
     }
 

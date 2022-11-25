@@ -8,7 +8,7 @@
         <div class="col-lg-11 col-xl-10">
             <div class="page-header">
                 <h2>Standar Pelayan </h2>
-                <?php if (session()->get('role_id') == 2 and session()->get('role_id') == 3) : ?>
+                <?php if (session()->get('role_id') == 2 and 3) : ?>
                     <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#tambahsp"><i class="fas fa-user-plus"></i> Add Standar Pelayanan</button>
                 <?php endif; ?>
                 <p class="lead"></p>
@@ -40,7 +40,7 @@
                                             <a href="<?= base_url(); ?>/standarpelayanan/download/<?= $dsp['id']; ?>" class="badge badge-primary">View File </a>
                                         </td>
                                         <td>
-                                            <?php if (session()->get('role_id') == 2 and session()->get('role_id') == 3) : ?>
+                                            <?php if (session()->get('role_id') == 2 and 3) : ?>
                                                 <a href="<?= base_url(); ?>/standarpelayanan/updateSP/<?= $dsp['id']; ?>" class="badge badge-info" data-toggle="modal" data-target="#UbahDataSp<?= $dsp['id']; ?>"><i class="fa fas fa-edit"></i></a>
                                                 <a href="<?= base_url(); ?>/standarpelayanan/deleteSP/<?= $dsp['id']; ?>" class="badge badge-danger tombol-hapus"><i class="fa fas fa-trash"></i></a>
                                             <?php endif; ?>
@@ -66,7 +66,7 @@
         <div class="modal-content">
             <form action="<?= base_url(); ?>/standarpelayanan/addSP" method="post" enctype="multipart/form-data">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Add Standar Pelayanan</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
