@@ -72,6 +72,7 @@ class Juknis extends BaseController
             'tanggal_disahkan' => $this->request->getVar('tanggaldisahkan'),
             'pengertian' => $this->request->getVar('pengertian'),
             'dasar_hukum' => $this->request->getVar('dasarhukum'),
+            'tujuan' => $this->request->getVar('tujuan'),
             'kebijakan_ketentuan' => $this->request->getVar('kebijakanketentuan'),
             'unit_pihakterkait' => $this->request->getVar('unitpihakterkait'),
             'catatan' => $this->request->getVar('catatan'),
@@ -83,30 +84,58 @@ class Juknis extends BaseController
         }
     }
 
-    public function updateInventaris($id)
+    public function updateJuknis($id)
     {
+
+        //validasi
+        $file = $this->request->getFile('filejuknis');
+        $fileLama = $this->request->getVar('filejuknislama');
+
+        if ($file->getError() == 4) {
+            $namaFile = $fileLama;
+        } else {
+            //Generate File Random
+            $namaFile = $file->getRandomName();
+            //Masukkan File Ke Folder
+            $file->move('assets/juknis', $namaFile);
+
+            //Hapus File Lama
+            unlink("assets/juknis/$fileLama");
+        }
         //Validasi Form
-        if ($this->inventarisModel->save([
+        if ($this->juknisModel->save([
             'id' => $id,
-            'nama_barang' => $this->request->getVar('namabarang'),
-            'kode_barang' => $this->request->getVar('kodebarang'),
-            'merk' => $this->request->getVar('merk'),
-            'bahan' => $this->request->getVar('bahan'),
-            'jumlah' => $this->request->getVar('jumlah'),
-            'score' => $this->request->getVar('score'),
-            'unit_id' => $this->request->getVar('units')
+            'nama_juknis' => $this->request->getVar('namajuknis'),
+            'no_juknis' => $this->request->getVar('nojuknis'),
+            'tanggal_dibuat' => $this->request->getVar('tanggaldibuat'),
+            'tanggal_disahkan' => $this->request->getVar('tanggaldisahkan'),
+            'pengertian' => $this->request->getVar('pengertian'),
+            'dasar_hukum' => $this->request->getVar('dasarhukum'),
+            'tujuan' => $this->request->getVar('tujuan'),
+            'kebijakan_ketentuan' => $this->request->getVar('kebijakanketentuan'),
+            'unit_pihakterkait' => $this->request->getVar('unitpihakterkait'),
+            'catatan' => $this->request->getVar('catatan'),
+            'file_juknis' => $namaFile
         ])) {
-            session()->setFlashdata('user', 'Mengupdate Inventaris');
-            return redirect()->to(base_url('inventaris'));
+            session()->setFlashdata('user', 'Mengupdate Juknis');
+            return redirect()->to(base_url('juknis'));
         }
     }
 
-    public function deleteInventaris($id)
+    public function deleteJuknis($id)
     {
         //Hapus Data
-        if ($this->inventarisModel->delete($id)) {
-            session()->setFlashdata('user', 'Menghapus Inventaris');
-            return redirect()->to(base_url('inventaris'));
+        $datafile = $this->juknisModel->where(['id' => $id])->first();
+        $fileLama = $datafile['file_juknis'];
+
+        //Hapus Data
+        if ($this->juknisModel->delete($id)) {
+
+            //Hapus File
+            unlink("assets/juknis/$fileLama");
+
+            session()->setFlashdata('user', 'Menghapus Juknis');
+            return redirect()->to(base_url('juknis'));
         }
     }
 }

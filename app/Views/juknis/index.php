@@ -96,7 +96,7 @@
                             <textarea class="form-control" name="pengertian" id="pengertian"></textarea>
                         </div>
                         <div class="form-group col-md-4">
-                            <label for="pengertian">Tujuan</label>
+                            <label for="tujuan">Tujuan</label>
                             <textarea class="form-control" name="tujuan" id="tujuan"></textarea>
                         </div>
 
@@ -139,6 +139,87 @@
     </div>
 </div>
 <!-- End Add User -->
+
+<?php foreach ($datajuknis as $dj) : ?>
+    <div class="modal fade" id="UbahDataJuknis<?= $dj['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <form action="<?= base_url(); ?>/juknis/updateJuknis/<?= $dj['id']; ?>" method="post" enctype="multipart/form-data">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Edit Juknis</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-row">
+                            <div class="form-group col-md-4">
+                                <label for="nama">Nama Juknis</label>
+                                <input type="text" class="form-control" name="namajuknis" id="namajuknis" value="<?= $dj['nama_juknis']; ?>">
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="nojuknis">No Juknis</label>
+                                <input type="text" class="form-control" name="nojuknis" id="nojuknis" value="<?= $dj['no_juknis']; ?>">
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="tanggaldibuat">Tanggal Dibuat</label>
+                                <input type="date" class="form-control" name="tanggaldibuat" id="tanggaldibuat" value="<?= $dj['tanggal_dibuat']; ?>">
+                            </div>
+
+                        </div>
+                        <div class=" form-row">
+                            <div class="form-group col-md-4">
+                                <label for="tanggaldisahkan">Tanggal Disahkan</label>
+                                <input type="date" class="form-control" name="tanggaldisahkan" id="tanggaldisahkan" value="<?= $dj['tanggal_disahkan']; ?>">
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="pengertian">Pengertian</label>
+                                <textarea class="form-control" name="pengertian" id="pengertian"><?= $dj['pengertian']; ?></textarea>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="pengertian">Tujuan</label>
+                                <textarea class="form-control" name="tujuan" id="tujuan"><?= $dj['tujuan']; ?></textarea>
+                            </div>
+
+                        </div>
+                        <div class=" form-row">
+                            <div class="form-group col-md-4">
+                                <label for="dasarhukum">Dasar Hukum</label>
+                                <textarea class="form-control" name="dasarhukum" id="dasarhukum"><?= $dj['dasar_hukum']; ?></textarea>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="kebijakanketentuan">Kebijakan / Ketentuan</label>
+                                <textarea class="form-control" name="kebijakanketentuan" id="kebijakanketentuan"><?= $dj['kebijakan_ketentuan']; ?></textarea>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="kebijakanketentuan">Unit / Pihak Terkait</label>
+                                <textarea class="form-control" name="unitpihakterkait" id="unitpihakterkait"><?= $dj['unit_pihakterkait']; ?></textarea>
+                            </div>
+
+                        </div>
+                        <div class=" form-row">
+                            <div class="form-group col-md-6">
+                                <label for="catatan ">Catatan</label>
+                                <textarea class="form-control" name="catatan" id="catatan"><?= $dj['catatan']; ?></textarea>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="email">File Dokumen</label>
+                                <input type="file" class="form-control" id="filejuknis" name="filejuknis" value="<?= $dj['file_juknis']; ?>">
+                                <input type="hidden" name="filejuknislama" value="<?= $dj['file_juknis']; ?>">
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+<?php endforeach; ?>
 
 
 
