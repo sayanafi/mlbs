@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 21, 2022 at 09:12 AM
+-- Generation Time: Dec 02, 2022 at 02:52 AM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 7.4.28
 
@@ -20,6 +20,36 @@ SET time_zone = "+00:00";
 --
 -- Database: `mlbs`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `inputan_juknis`
+--
+
+CREATE TABLE `inputan_juknis` (
+  `id` int(11) UNSIGNED NOT NULL,
+  `id_juknis` int(11) NOT NULL,
+  `prosedur_tetap` varchar(128) NOT NULL,
+  `sikap` varchar(128) NOT NULL,
+  `ucapan` varchar(128) NOT NULL,
+  `pelaksana` varchar(128) NOT NULL,
+  `persyaratan_perlengkapan` varchar(128) NOT NULL,
+  `waktu` varchar(128) NOT NULL,
+  `output` varchar(128) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `inputan_juknis`
+--
+
+INSERT INTO `inputan_juknis` (`id`, `id_juknis`, `prosedur_tetap`, `sikap`, `ucapan`, `pelaksana`, `persyaratan_perlengkapan`, `waktu`, `output`) VALUES
+(1, 1, 'tes1', 'tes1', 'tes1', 'tes1', 'tes1', 'tes1', 'tes1'),
+(2, 1, 'tes2', 'tes2', 'tes2', 'tes2', 'tes2', 'tes2', 'tes2'),
+(3, 1, 'asdasd', 'asd', 'asdad', 'asd', 'asd', 'asd', 'asd'),
+(4, 1, 'tes3', 'tes3', 'tes3', 'tes3', 'tes3', 'tes3', 'tes3'),
+(5, 1, 'tes4', 'tes4', 'tes4', 'tes4', 'tes4', 'tes4', 'tes4'),
+(6, 1, 'tes5', 'tes5', 'tes5', 'tes5', 'tes5', 'tes5', 'tes5');
 
 -- --------------------------------------------------------
 
@@ -49,6 +79,35 @@ INSERT INTO `inventaris` (`id`, `nama_barang`, `kode_barang`, `merk`, `bahan`, `
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `juknis`
+--
+
+CREATE TABLE `juknis` (
+  `id` int(11) UNSIGNED NOT NULL,
+  `nama_juknis` varchar(128) NOT NULL,
+  `no_juknis` varchar(128) NOT NULL,
+  `tanggal_dibuat` date NOT NULL,
+  `tanggal_disahkan` date NOT NULL,
+  `pengertian` varchar(128) NOT NULL,
+  `tujuan` varchar(128) NOT NULL,
+  `dasar_hukum` varchar(128) NOT NULL,
+  `kebijakan_ketentuan` varchar(128) NOT NULL,
+  `unit_pihakterkait` varchar(128) NOT NULL,
+  `catatan` varchar(128) NOT NULL,
+  `file_juknis` varchar(128) NOT NULL,
+  `user_created` varchar(128) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `juknis`
+--
+
+INSERT INTO `juknis` (`id`, `nama_juknis`, `no_juknis`, `tanggal_dibuat`, `tanggal_disahkan`, `pengertian`, `tujuan`, `dasar_hukum`, `kebijakan_ketentuan`, `unit_pihakterkait`, `catatan`, `file_juknis`, `user_created`) VALUES
+(1, 'Juknis 1', '12351sd12', '2022-11-20', '2022-11-25', 'Tes', 'Tes', 'tes', 'tes', 'tes', 'tes', 'C:\\fakepath\\RPL - AQIL MUSTAQIM (1201190017) - Kesediaan pembimbing.pdf', '');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `migrations`
 --
 
@@ -72,7 +131,9 @@ INSERT INTO `migrations` (`id`, `version`, `class`, `group`, `namespace`, `time`
 (3, '2022-11-15-035456', 'App\\Database\\Migrations\\Units', 'default', 'App', 1668484555, 3),
 (4, '2022-11-16-043613', 'App\\Database\\Migrations\\StandarPelayanan', 'default', 'App', 1668573653, 4),
 (5, '2022-11-16-050036', 'App\\Database\\Migrations\\Inventaris', 'default', 'App', 1668574936, 5),
-(6, '2022-11-17-092007', 'App\\Database\\Migrations\\SPO', 'default', 'App', 1668676943, 6);
+(6, '2022-11-17-092007', 'App\\Database\\Migrations\\SPO', 'default', 'App', 1668676943, 6),
+(7, '2022-11-21-115000', 'App\\Database\\Migrations\\Juknis', 'default', 'App', 1669139908, 7),
+(8, '2022-11-22-175932', 'App\\Database\\Migrations\\InputanJuknis', 'default', 'App', 1669140175, 8);
 
 -- --------------------------------------------------------
 
@@ -195,9 +256,21 @@ INSERT INTO `user_role` (`id`, `role`) VALUES
 --
 
 --
+-- Indexes for table `inputan_juknis`
+--
+ALTER TABLE `inputan_juknis`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `inventaris`
 --
 ALTER TABLE `inventaris`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `juknis`
+--
+ALTER TABLE `juknis`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -241,16 +314,28 @@ ALTER TABLE `user_role`
 --
 
 --
+-- AUTO_INCREMENT for table `inputan_juknis`
+--
+ALTER TABLE `inputan_juknis`
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
 -- AUTO_INCREMENT for table `inventaris`
 --
 ALTER TABLE `inventaris`
   MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
+-- AUTO_INCREMENT for table `juknis`
+--
+ALTER TABLE `juknis`
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `spo`

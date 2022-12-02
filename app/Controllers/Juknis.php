@@ -2,6 +2,8 @@
 
 namespace App\Controllers;
 
+use App\Database\Migrations\InputanJuknis;
+use App\Models\InputanJuknisModel;
 use App\Models\JuknisModel;
 use App\Models\UnitsModel;
 use Config\Database;
@@ -10,11 +12,13 @@ class Juknis extends BaseController
 {
     protected $juknisModel;
     protected $unitsModel;
+    protected $inputanJuknisModel;
 
     public function __construct()
     {
         $this->juknisModel = new JuknisModel();
         $this->unitsModel = new UnitsModel();
+        $this->inputanJuknisModel = new InputanJuknisModel();
     }
 
     public function index()
@@ -137,5 +141,65 @@ class Juknis extends BaseController
             session()->setFlashdata('user', 'Menghapus Juknis');
             return redirect()->to(base_url('juknis'));
         }
+    }
+
+    public function detailJuknis()
+    {
+
+        //Cek Apakah Ada Sessionnya
+        if (session()->get('logged_in')) {
+            //Kalau Ada Cek Apakah Sessionnya 
+            if (session()->get('role_id') == 1) {
+                return redirect()->to(base_url('admin'));
+            }
+        } else {
+            return redirect()->to(base_url());
+        }
+
+        $juknis = $this->juknisModel->findAll();
+
+
+        $data = [
+            'title' => 'MLBS || Staff Management',
+            'menu' => 'juknis',
+            'juknis' => $juknis,
+            'validation' => \Config\Services::validation()
+        ];
+
+        return view('juknis/detailJuknis', $data);
+    }
+
+    public function addDetailJuknis()
+    {
+        $prosedurtetap = $this->request->getVar('prosedurtetap');
+        $sikap = $this->request->getVar('sikap');
+        $ucapan = $this->request->getVar('ucapan');
+        $pelaksana = $this->request->getVar('pelaksana');
+        $persyaratanperlengkapan = $this->request->getVar('persyaratanperlengkapan');
+        $waktu = $this->request->getVar('waktu');
+        $output = $this->request->getVar('output');
+        $juknis = $this->request->getVar('juknis');
+
+        $jmldata = count($prosedurtetap);
+
+        for ($i = 0; $i < $jmldata; $i++) {
+            $this->inputanJuknisModel->save([
+                'id_juknis' => $juknis,
+                'prosedur_tetap' => $prosedurtetap[$i],
+                'sikap' => $sikap[$i],
+                'ucapan' => $ucapan[$i],
+                'pelaksana' => $pelaksana[$i],
+                'persyaratan_perlengkapan' => $persyaratanperlengkapan[$i],
+                'waktu' => $waktu[$i],
+                'output' => $output[$i]
+            ]);
+        }
+        $msg = [
+            'sukses' => "$jmldata Data Juknis Berhasil Di Simpan"
+        ];
+
+        echo json_encode($msg);
+        session()->setFlashdata('user', 'Menambah Detail Juknis');
+        return redirect()->to(base_url('juknis'));
     }
 }

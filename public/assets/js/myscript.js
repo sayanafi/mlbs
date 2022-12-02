@@ -46,3 +46,41 @@ if ( swal1 ){
         icon: 'success'
     })
 }
+
+$('.btn-add-form').click(function(e){
+  e.preventDefault();
+  $('.formtambah').append(`
+  <tr>
+
+  <td>
+      <input type="text" name="prosedurtetap[]" class="form-control">
+  </td>
+  <td>
+      <input type="text" name="sikap[]" class="form-control">
+  </td>
+  <td>
+      <input type="text" name="ucapan[]" class="form-control">
+  </td>
+  <td>
+      <input type="text" name="pelaksana[]" class="form-control">
+  </td>
+  <td>
+      <input type="text" name="persyaratanperlengkapan[]" class="form-control">
+  </td>
+  <td>
+      <input type="text" name="waktu[]" class="form-control">
+  </td>
+  <td>
+      <input type="text" name="output[]" class="form-control">
+  </td>
+  <td>
+      <button type="button" class="badge badge-danger btn-delete-form"><i class="fa fa-trash"></i></button>
+  </td>
+</tr>
+  `);
+});
+
+$(document).on('click','.btn-delete-form',function(e){
+  e.preventDefault();
+  $(this).parents('tr').remove();
+});

@@ -704,6 +704,33 @@
 
             }
         });
+
+        $('formdetailjuknis').submit(function(e) {
+            e.preventDefault();
+            //Ajax
+            $.ajax({
+                method: "POST",
+                url: $(this).attr('action'),
+                data: $(this).serialize(),
+                success: function(data) {
+                    if (data.sukses) {
+                        Swal.fire({
+                            title: 'Data Detail Juknis',
+                            html: `${data.sukses}`,
+                            icon: 'success'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                window.location.href = "<?= base_url(); ?>/juknis";
+                            }
+                        })
+                    }
+
+                }
+            });
+
+
+
+        });
     </script>
 
 </body>

@@ -9,6 +9,7 @@
             <div class="page-header">
                 <h2>List Juknis </h2>
                 <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#tambahjuknis"><i class="fas fa-user-plus"></i> Add Juknis</button>
+                <a href="<?= base_url(); ?>/juknis/detailJuknis" class="btn btn-primary btn-sm"><i class="fas fa-regular fa-memo-circle-info"></i> Add Detail Juknis</a>
                 <p class="lead"></p>
 
             </div>
