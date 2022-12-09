@@ -34,16 +34,16 @@ class Juknis extends BaseController
             return redirect()->to(base_url());
         }
 
-        //Ambil Data Inventaris Join Dengan Units
-        // $db      = \Config\Database::connect();
-        // $builder = $db->table('juknis');
-        // $builder->select('*,juknis.id as id');
-        // $builder->join('inputan_juknis', 'juknis.id = inputan_juknis.id_juknis');
-        // $query = $builder->get();
-        // $juknis = $query->getResultArray();
+        //Ambil Data Juknis Join Dengan Units
+        $db      = \Config\Database::connect();
+        $builder = $db->table('juknis');
+        $builder->select('*,juknis.id as id');
+        $builder->join('units', 'juknis.unit_pihakterkait = units.id');
+        $query = $builder->get();
+        $juknis = $query->getResultArray();
 
         //Data Juknis
-        $juknis = $this->juknisModel->findAll();
+        //$juknis = $this->juknisModel->findAll();
         $units = $this->unitsModel->findAll();
 
 
@@ -103,8 +103,11 @@ class Juknis extends BaseController
             //Masukkan File Ke Folder
             $file->move('assets/juknis', $namaFile);
 
-            //Hapus File Lama
-            unlink("assets/juknis/$fileLama");
+
+            if ($fileLama != null) {
+                //Hapus File Lama
+                unlink("assets/juknis/$fileLama");
+            }
         }
         //Validasi Form
         if ($this->juknisModel->save([

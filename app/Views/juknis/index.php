@@ -37,11 +37,12 @@
                                         <td>
                                             <button class="badge badge-dark"><?= $dj['no_juknis']; ?></button>
                                         </td>
-                                        <td><?= $dj['unit_pihakterkait']; ?></td>
+                                        <td><?= $dj['units']; ?></td>
                                         <td>Aqil</td>
                                         <td><?= $dj['tanggal_dibuat']; ?></td>
 
                                         <td>
+                                            <button class="badge badge-primary" data-toggle="modal" data-target="#DetailJuknis<?= $dj['id']; ?>">View</button>
                                             <a href="<?= base_url(); ?>/juknis/updateJuknis/<?= $dj['id']; ?>" class="badge badge-info" data-toggle="modal" data-target="#UbahDataJuknis<?= $dj['id']; ?>"><i class="fa fas fa-edit"></i></a>
                                             <a href="<?= base_url(); ?>/juknis/deleteJuknis/<?= $dj['id']; ?>" class="badge badge-danger tombol-hapus"><i class="fa fas fa-trash"></i></a>
                                         </td>
@@ -112,8 +113,12 @@
                             <textarea class="form-control" name="kebijakanketentuan" id="kebijakanketentuan"></textarea>
                         </div>
                         <div class="form-group col-md-4">
-                            <label for="kebijakanketentuan">Unit / Pihak Terkait</label>
-                            <textarea class="form-control" name="unitpihakterkait" id="unitpihakterkait"></textarea>
+                            <label>Pilih Units...</label>
+                            <select class="form-control" aria-label="Default select example" id="unitpihakterkait" name="unitpihakterkait">
+                                <?php foreach ($dataunits as $du) : ?>
+                                    <option value="<?= $du['id']; ?>"><?= $du['units']; ?></option>
+                                <?php endforeach; ?>
+                            </select>
                         </div>
 
                     </div>
