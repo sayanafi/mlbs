@@ -26,11 +26,13 @@
                         <table class="table table-sm table-bordered">
                             <button type="submit" class="btn btn-primary btn-add-detailjuknis">Save Data</button>
                             <hr>
+                            <label>Pilih Juknis...</label>
                             <select class="form-control" aria-label="Default select example" name="juknis" id="juknis">
                                 <?php foreach ($juknis as $j) : ?>
                                     <option value="<?= $j['id']; ?>"><?= $j['nama_juknis']; ?></option>
                                 <?php endforeach; ?>
                             </select>
+                            <br>
                             <thead>
                                 <th>Prosedur Tetap</th>
                                 <th>Sikap</th>

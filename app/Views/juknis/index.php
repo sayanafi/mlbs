@@ -8,9 +8,11 @@
         <div class="col-lg-11 col-xl-10">
             <div class="page-header">
                 <h2>List Juknis </h2>
-                <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#tambahjuknis"><i class="fas fa-user-plus"></i> Add Juknis</button>
-                <a href="<?= base_url(); ?>/juknis/detailJuknis" class="btn btn-primary btn-sm"><i class="fas fa-regular fa-memo-circle-info"></i> Add Detail Juknis</a>
-                <p class="lead"></p>
+                <?php if (session()->get('role_id') == 3) :  ?>
+                    <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#tambahjuknis"><i class="fas fa-user-plus"></i> Add Juknis</button>
+                    <a href="<?= base_url(); ?>/juknis/detailJuknis" class="btn btn-primary btn-sm"><i class="fas fa-regular fa-memo-circle-info"></i> Add Detail Juknis</a>
+                    <p class="lead"></p>
+                <?php endif; ?>
 
             </div>
 
@@ -27,7 +29,9 @@
                                     <th>Unit</th>
                                     <th>User</th>
                                     <th>Data Created</th>
-                                    <th>Aksi</th>
+                                    <?php if (session()->get('role_id') == 3) :  ?>
+                                        <th>Aksi</th>
+                                    <?php endif; ?>
                                 </tr>
                             </thead>
                             <tbody>
@@ -38,14 +42,16 @@
                                             <button class="badge badge-dark"><?= $dj['no_juknis']; ?></button>
                                         </td>
                                         <td><?= $dj['units']; ?></td>
-                                        <td>Aqil</td>
+                                        <td><?= $dj['user_created']; ?></td>
                                         <td><?= $dj['tanggal_dibuat']; ?></td>
+                                        <?php if (session()->get('role_id') == 3) :  ?>
+                                            <td>
 
-                                        <td>
-                                            <button class="badge badge-primary" data-toggle="modal" data-target="#DetailJuknis<?= $dj['id']; ?>">View</button>
-                                            <a href="<?= base_url(); ?>/juknis/updateJuknis/<?= $dj['id']; ?>" class="badge badge-info" data-toggle="modal" data-target="#UbahDataJuknis<?= $dj['id']; ?>"><i class="fa fas fa-edit"></i></a>
-                                            <a href="<?= base_url(); ?>/juknis/deleteJuknis/<?= $dj['id']; ?>" class="badge badge-danger tombol-hapus"><i class="fa fas fa-trash"></i></a>
-                                        </td>
+                                                <a href="<?= base_url(); ?>/juknis/detailJuknis2/<?= $dj['id']; ?>" class="badge badge-primary">View</a>
+                                                <a href="<?= base_url(); ?>/juknis/updateJuknis/<?= $dj['id']; ?>" class="badge badge-info" data-toggle="modal" data-target="#UbahDataJuknis<?= $dj['id']; ?>"><i class="fa fas fa-edit"></i></a>
+                                                <a href="<?= base_url(); ?>/juknis/deleteJuknis/<?= $dj['id']; ?>" class="badge badge-danger tombol-hapus"><i class="fa fas fa-trash"></i></a>
+                                            </td>
+                                        <?php endif; ?>
                                     </tr>
 
                             </tbody>

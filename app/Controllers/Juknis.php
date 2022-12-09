@@ -61,6 +61,22 @@ class Juknis extends BaseController
     public function addJuknis()
     {
 
+        //Validasi Role
+        if (session()->get('logged_in')) {
+            if (session()->get('role_id') != 3) {
+                //Kalau Yang login bukan staff tendang
+                if (session()->get('role_id') == 1) {
+                    return redirect()->to(base_url('admin'));
+                } else if (session()->get('role_id') == 2) {
+                    return redirect()->to(base_url('manajemen'));
+                } else if (session()->get('role_id') == 4) {
+                    return redirect()->to(base_url('konsultan'));
+                }
+            }
+        } else {
+            return redirect()->to(base_url());
+        }
+
         //Tangkap File Nya
         $file = $this->request->getFile('filejuknis');
         //Generate File Random
@@ -90,6 +106,22 @@ class Juknis extends BaseController
 
     public function updateJuknis($id)
     {
+
+        //Validasi Role
+        if (session()->get('logged_in')) {
+            if (session()->get('role_id') != 3) {
+                //Kalau Yang login bukan staff tendang
+                if (session()->get('role_id') == 1) {
+                    return redirect()->to(base_url('admin'));
+                } else if (session()->get('role_id') == 2) {
+                    return redirect()->to(base_url('manajemen'));
+                } else if (session()->get('role_id') == 4) {
+                    return redirect()->to(base_url('konsultan'));
+                }
+            }
+        } else {
+            return redirect()->to(base_url());
+        }
 
         //validasi
         $file = $this->request->getFile('filejuknis');
@@ -122,7 +154,8 @@ class Juknis extends BaseController
             'kebijakan_ketentuan' => $this->request->getVar('kebijakanketentuan'),
             'unit_pihakterkait' => $this->request->getVar('unitpihakterkait'),
             'catatan' => $this->request->getVar('catatan'),
-            'file_juknis' => $namaFile
+            'file_juknis' => $namaFile,
+            'user_created' => session()->get('nama')
         ])) {
             session()->setFlashdata('user', 'Mengupdate Juknis');
             return redirect()->to(base_url('juknis'));
@@ -131,12 +164,36 @@ class Juknis extends BaseController
 
     public function deleteJuknis($id)
     {
+
+        //Validasi Role
+        if (session()->get('logged_in')) {
+            if (session()->get('role_id') != 3) {
+                //Kalau Yang login bukan staff tendang
+                if (session()->get('role_id') == 1) {
+                    return redirect()->to(base_url('admin'));
+                } else if (session()->get('role_id') == 2) {
+                    return redirect()->to(base_url('manajemen'));
+                } else if (session()->get('role_id') == 4) {
+                    return redirect()->to(base_url('konsultan'));
+                }
+            }
+        } else {
+            return redirect()->to(base_url());
+        }
         //Hapus Data
         $datafile = $this->juknisModel->where(['id' => $id])->first();
         $fileLama = $datafile['file_juknis'];
 
+        //Data Detail Juknis
+        $detailJuknis = $this->inputanJuknisModel->where(['id_juknis' => $id])->findAll();
+
         //Hapus Data
         if ($this->juknisModel->delete($id)) {
+
+            //Hapus Juga Detail Yang Terkait Dengan Juknis
+            foreach ($detailJuknis as $dj) {
+                $this->inputanJuknisModel->delete($dj['id']);
+            }
 
             //Hapus File
             unlink("assets/juknis/$fileLama");
@@ -146,8 +203,50 @@ class Juknis extends BaseController
         }
     }
 
+    public function deleteDetailJuknis($id)
+    {
+
+        //Validasi Role
+        if (session()->get('logged_in')) {
+            if (session()->get('role_id') != 3) {
+                //Kalau Yang login bukan staff tendang
+                if (session()->get('role_id') == 1) {
+                    return redirect()->to(base_url('admin'));
+                } else if (session()->get('role_id') == 2) {
+                    return redirect()->to(base_url('manajemen'));
+                } else if (session()->get('role_id') == 4) {
+                    return redirect()->to(base_url('konsultan'));
+                }
+            }
+        } else {
+            return redirect()->to(base_url());
+        }
+
+        //Hapus Data
+        if ($this->inputanJuknisModel->delete($id)) {
+            session()->setFlashdata('user', 'Menghapus Detail Juknis');
+            return redirect()->to(base_url('juknis'));
+        }
+    }
+
     public function detailJuknis()
     {
+
+        //Validasi Role
+        if (session()->get('logged_in')) {
+            if (session()->get('role_id') != 3) {
+                //Kalau Yang login bukan staff tendang
+                if (session()->get('role_id') == 1) {
+                    return redirect()->to(base_url('admin'));
+                } else if (session()->get('role_id') == 2) {
+                    return redirect()->to(base_url('manajemen'));
+                } else if (session()->get('role_id') == 4) {
+                    return redirect()->to(base_url('konsultan'));
+                }
+            }
+        } else {
+            return redirect()->to(base_url());
+        }
 
         //Cek Apakah Ada Sessionnya
         if (session()->get('logged_in')) {
@@ -170,6 +269,41 @@ class Juknis extends BaseController
         ];
 
         return view('juknis/detailJuknis', $data);
+    }
+
+    public function detailJuknis2($id)
+    {
+
+        //Validasi Role
+        if (session()->get('logged_in')) {
+            if (session()->get('role_id') != 3) {
+                //Kalau Yang login bukan staff tendang
+                if (session()->get('role_id') == 1) {
+                    return redirect()->to(base_url('admin'));
+                } else if (session()->get('role_id') == 2) {
+                    return redirect()->to(base_url('manajemen'));
+                } else if (session()->get('role_id') == 4) {
+                    return redirect()->to(base_url('konsultan'));
+                }
+            }
+        } else {
+            return redirect()->to(base_url());
+        }
+
+        $juknis = $this->juknisModel->where(['id' => $id])->first();
+        $detailJuknis = $this->inputanJuknisModel->where(['id_juknis' => $id])->findAll();
+
+
+
+        $data = [
+            'title' => 'MLBS || Staff Management',
+            'menu' => 'juknis',
+            'juknis' => $juknis['nama_juknis'],
+            'detailjuknis' => $detailJuknis,
+            'validation' => \Config\Services::validation()
+        ];
+
+        return view('juknis/detailJuknis2', $data);
     }
 
     public function addDetailJuknis()
