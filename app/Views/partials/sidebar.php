@@ -33,7 +33,9 @@
                 <div class="collapse" id="juknis">
                     <ul class="nav flex-column sub-menu">
                         <li class="nav-item"> <a class="nav-link" href="<?= base_url(); ?>/juknis">List Juknis</a></li>
-                        <li class="nav-item"> <a class="nav-link" href="pages/ui-features/dropdowns.html">Nilai Juknis</a></li>
+                        <?php if (session()->get('role_id') == 2 and session()->get('role_id') == 4) : ?>
+                            <li class="nav-item"> <a class="nav-link" href="<?= base_url(); ?>/nilaiJuknis">Nilai Juknis</a></li>
+                        <?php endif; ?>
                     </ul>
                 </div>
             </li>

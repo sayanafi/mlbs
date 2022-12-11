@@ -34,28 +34,41 @@ class Juknis extends BaseController
             return redirect()->to(base_url());
         }
 
-        //Ambil Data Juknis Join Dengan Units
-        $db      = \Config\Database::connect();
-        $builder = $db->table('juknis');
-        $builder->select('*,juknis.id as id');
-        $builder->join('units', 'juknis.unit_pihakterkait = units.id');
-        $query = $builder->get();
-        $juknis = $query->getResultArray();
+        if (session()->get('role_id') != 4) {
 
-        //Data Juknis
-        //$juknis = $this->juknisModel->findAll();
-        $units = $this->unitsModel->findAll();
+            //Ambil Data Juknis Join Dengan Units
+            $db      = \Config\Database::connect();
+            $builder = $db->table('juknis');
+            $builder->select('*,juknis.id as id');
+            $builder->join('units', 'juknis.unit_pihakterkait = units.id');
+            $query = $builder->get();
+            $juknis = $query->getResultArray();
+
+            //Data Juknis
+            //$juknis = $this->juknisModel->findAll();
+            $units = $this->unitsModel->findAll();
 
 
-        $data = [
-            'title' => 'MLBS || Staff Management',
-            'menu' => 'juknis',
-            'datajuknis' => $juknis,
-            'dataunits' => $units,
-            'validation' => \Config\Services::validation()
-        ];
+            $data = [
+                'title' => 'MLBS || Staff Management',
+                'menu' => 'juknis',
+                'datajuknis' => $juknis,
+                'dataunits' => $units,
+                'validation' => \Config\Services::validation()
+            ];
 
-        return view('juknis/index', $data);
+            return view('juknis/index', $data);
+        } else {
+            $units = $this->unitsModel->findAll();
+            $data = [
+                'title' => 'MLBS || Staff Management',
+                'menu' => 'juknis',
+                'dataunits' => $units,
+                'validation' => \Config\Services::validation()
+            ];
+
+            return view('juknis/nilaiJuknis', $data);
+        }
     }
 
     public function addJuknis()
@@ -337,6 +350,83 @@ class Juknis extends BaseController
 
         echo json_encode($msg);
         session()->setFlashdata('user', 'Menambah Detail Juknis');
+        return redirect()->to(base_url('juknis'));
+    }
+
+    public function nilaiActionJuknis($id)
+    {
+
+        //Ambil Data Juknis Join Dengan Units
+        $db      = \Config\Database::connect();
+        $builder = $db->table('juknis');
+        $builder->select('juknis.id as id,units,unit_pihakterkait,nama_juknis');
+        $builder->join('units', 'juknis.unit_pihakterkait = units.id');
+        $builder->where('unit_pihakterkait', $id);
+        $query = $builder->get();
+        $juknis = $query->getResultArray();
+        $data = [
+            'title' => 'MLBS || Staff Management',
+            'menu' => 'juknis',
+            'juknis' => $juknis,
+            'validation' => \Config\Services::validation()
+        ];
+
+        return view('juknis/nilaiActionJuknis', $data);
+    }
+
+    public function viewNilaiJuknis($idjuknis)
+    {
+
+        //$juknis = $this->juknisModel->where(['id' => $idjuknis])->first();
+        $db      = \Config\Database::connect();
+        $builder = $db->table('juknis');
+        $builder->select('*,juknis.id as id');
+        $builder->join('units', 'juknis.unit_pihakterkait = units.id');
+        $builder->where('juknis.id', $idjuknis);
+        $query = $builder->get();
+        $juknis = $query->getRowArray();
+
+        //Ambil Data Juknis Join Dengan Units
+        $db      = \Config\Database::connect();
+        $builder = $db->table('inputan_juknis');
+        $builder->select('*,inputan_juknis.id as id');
+        $builder->join('juknis', 'inputan_juknis.id_juknis = juknis.id');
+        $builder->where('id_juknis', $idjuknis);
+        $query = $builder->get();
+        $detailjuknis = $query->getResultArray();
+
+        $data = [
+            'title' => 'MLBS || Staff Management',
+            'menu' => 'juknis',
+            'juknis' => $juknis,
+            'detailjuknis' => $detailjuknis,
+            'validation' => \Config\Services::validation()
+        ];
+
+        return view('juknis/viewNilaiJuknis', $data);
+    }
+
+    public function addNilaiJuknis()
+    {
+        $minggu = $this->request->getVar('minggu');
+        $bulan = $this->request->getVar('bulan');
+        $tahun = $this->request->getVar('tahun');
+        $penilaian = $this->request->getVar('penilaian');
+        $id = $this->request->getVar('idInputanJuknis');
+
+        $jmldata = count($id);
+
+
+        for ($i = 0; $i < $jmldata; $i++) {
+            $this->inputanJuknisModel->save([
+                'id' => $id[$i],
+                'minggu' => $minggu,
+                'bulan' => $bulan,
+                'tahun' => $tahun,
+                'penilaian' => $penilaian[$i]
+            ]);
+        }
+        session()->setFlashdata('user', 'Nilai Juknis');
         return redirect()->to(base_url('juknis'));
     }
 }

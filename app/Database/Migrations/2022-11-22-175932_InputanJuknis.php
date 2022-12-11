@@ -43,6 +43,22 @@ class InputanJuknis extends Migration
             'output' => [
                 'type'           => 'VARCHAR',
                 'constraint'     => '128'
+            ],
+            'penilaian' => [
+                'type'           => 'INT',
+                'constraint'     => '11'
+            ],
+            'minggu' => [
+                'type'           => 'INT',
+                'constraint'     => '11'
+            ],
+            'bulan' => [
+                'type'           => 'VARCHAR',
+                'constraint'     => '128'
+            ],
+            'tahun' => [
+                'type'           => 'INT',
+                'constraint'     => '11'
             ]
 
         ]);
