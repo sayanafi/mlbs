@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 08, 2022 at 04:33 AM
+-- Generation Time: Dec 11, 2022 at 04:04 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 7.4.28
 
@@ -36,20 +36,24 @@ CREATE TABLE `inputan_juknis` (
   `pelaksana` varchar(128) NOT NULL,
   `persyaratan_perlengkapan` varchar(128) NOT NULL,
   `waktu` varchar(128) NOT NULL,
-  `output` varchar(128) NOT NULL
+  `output` varchar(128) NOT NULL,
+  `penilaian` int(11) NOT NULL,
+  `minggu` int(11) NOT NULL,
+  `bulan` int(11) NOT NULL,
+  `tahun` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `inputan_juknis`
 --
 
-INSERT INTO `inputan_juknis` (`id`, `id_juknis`, `prosedur_tetap`, `sikap`, `ucapan`, `pelaksana`, `persyaratan_perlengkapan`, `waktu`, `output`) VALUES
-(1, 1, 'tes1', 'tes1', 'tes1', 'tes1', 'tes1', 'tes1', 'tes1'),
-(2, 1, 'tes2', 'tes2', 'tes2', 'tes2', 'tes2', 'tes2', 'tes2'),
-(3, 1, 'asdasd', 'asd', 'asdad', 'asd', 'asd', 'asd', 'asd'),
-(4, 1, 'tes3', 'tes3', 'tes3', 'tes3', 'tes3', 'tes3', 'tes3'),
-(5, 1, 'tes4', 'tes4', 'tes4', 'tes4', 'tes4', 'tes4', 'tes4'),
-(6, 1, 'tes5', 'tes5', 'tes5', 'tes5', 'tes5', 'tes5', 'tes5');
+INSERT INTO `inputan_juknis` (`id`, `id_juknis`, `prosedur_tetap`, `sikap`, `ucapan`, `pelaksana`, `persyaratan_perlengkapan`, `waktu`, `output`, `penilaian`, `minggu`, `bulan`, `tahun`) VALUES
+(1, 1, 'tes1', 'tes1', 'tes1', 'tes1', 'tes1', 'tes1', 'tes1', 1, 1, 2, 2022),
+(2, 1, 'tes2', 'tes2', 'tes2', 'tes2', 'tes2', 'tes2', 'tes2', 3, 1, 2, 2022),
+(4, 1, 'tes3', 'tes3', 'tes3', 'tes3', 'tes3', 'tes3', 'tes3', 2, 1, 2, 2022),
+(5, 1, 'tes4', 'tes4', 'tes4', 'tes4', 'tes4', 'tes4', 'tes4', 4, 1, 2, 2022),
+(9, 4, 'oke', 'oke', 'okeo', 'oke', 'oke', 'oke', 'oke', 4, 1, 2, 2021),
+(10, 4, 'yes', 'yes', 'yes', 'yes', 'yes', 'yes', 'yes', 4, 1, 2, 2021);
 
 -- --------------------------------------------------------
 
@@ -103,7 +107,8 @@ CREATE TABLE `juknis` (
 --
 
 INSERT INTO `juknis` (`id`, `nama_juknis`, `no_juknis`, `tanggal_dibuat`, `tanggal_disahkan`, `pengertian`, `tujuan`, `dasar_hukum`, `kebijakan_ketentuan`, `unit_pihakterkait`, `catatan`, `file_juknis`, `user_created`) VALUES
-(1, 'Juknis 1', '12351sd12', '2022-11-20', '2022-11-25', 'Tes', 'Tes', 'tes', 'tes', 'tes', 'tes', 'C:\\fakepath\\RPL - AQIL MUSTAQIM (1201190017) - Kesediaan pembimbing.pdf', '');
+(1, 'Juknis 1', '12351sd12', '2022-11-20', '2022-11-25', 'Tes', 'Tes', 'tes', 'tes', '2', 'tes', '1670474482_ef430834a860c6c8116f.pdf', 'Aqil Mustaqim'),
+(4, 'Juknis 2', '123123124', '2022-12-09', '2022-12-10', 'asd', 'asasd', 'asd', 'asd', '3', 'asd', '1670569362_c87352a7a3d75f42eefd.pdf', 'Diana Puspita');
 
 -- --------------------------------------------------------
 
@@ -317,7 +322,7 @@ ALTER TABLE `user_role`
 -- AUTO_INCREMENT for table `inputan_juknis`
 --
 ALTER TABLE `inputan_juknis`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `inventaris`
@@ -329,7 +334,7 @@ ALTER TABLE `inventaris`
 -- AUTO_INCREMENT for table `juknis`
 --
 ALTER TABLE `juknis`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `migrations`
