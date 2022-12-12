@@ -47,8 +47,12 @@
                                         </td>
 
                                         <td>
-                                            <a href="<?= base_url(); ?>/inventaris/updateInventaris/<?= $dv['id']; ?>" class="badge badge-info" data-toggle="modal" data-target="#UbahDataInventaris<?= $dv['id']; ?>"><i class="fa fas fa-edit"></i></a>
-                                            <a href="<?= base_url(); ?>/inventaris/deleteInventaris/<?= $dv['id']; ?>" class="badge badge-danger tombol-hapus"><i class="fa fas fa-trash"></i></a>
+                                            <?php if (session()->get('role_id') == 2) { ?>
+                                                <a href="<?= base_url(); ?>/inventaris/updateInventaris/<?= $dv['id']; ?>" class="badge badge-info" data-toggle="modal" data-target="#UbahDataInventaris<?= $dv['id']; ?>"><i class="fa fas fa-edit"></i></a>
+                                                <a href="<?= base_url(); ?>/inventaris/deleteInventaris/<?= $dv['id']; ?>" class="badge badge-danger tombol-hapus"><i class="fa fas fa-trash"></i></a>
+                                            <?php } else { ?>
+                                                <a href="<?= base_url(); ?>/inventaris/actionInventaris/<?= $dv['id']; ?>" class="badge badge-warning" data-toggle="modal" data-target="#NilaiInventaris<?= $dv['id']; ?>"><i class="fa fas fa-edit"></i> Score</a>
+                                            <?php } ?>
                                         </td>
                                     </tr>
 
@@ -135,7 +139,7 @@
             <div class="modal-content">
                 <form action="<?= base_url(); ?>/inventaris/updateInventaris/<?= $dv['id']; ?>" method="post">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">Ubah Inventaris</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -168,10 +172,7 @@
                                 <label for="password">Jumlah</label>
                                 <input type="text" class="form-control" name="jumlah" id="jumlah" value="<?= $dv['jumlah']; ?>">
                             </div>
-                            <div class="form-group col-md-4">
-                                <label for="email">Score</label>
-                                <input type="text" class="form-control" name="score" id="score" value="<?= $dv['score']; ?>">
-                            </div>
+
                             <div class="form-group col-md-6">
                                 <label>Pilih Units...</label>
                                 <select class="form-control" aria-label="Default select example" name="units" id="units">
@@ -179,6 +180,46 @@
                                     <?php foreach ($dataunits as $du) : ?>
                                         <option value="<?= $du['id']; ?>"><?= $du['units']; ?></option>
                                     <?php endforeach; ?>
+                                </select>
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+<?php endforeach; ?>
+
+<?php foreach ($datainventaris as $dv) : ?>
+    <div class="modal fade" id="NilaiInventaris<?= $dv['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <form action="<?= base_url(); ?>/inventaris/nilaiInventaris/<?= $dv['id']; ?>" method="post">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Nilai Inventaris</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+
+                        <div class="form-row">
+
+
+                            <div class="form-group col-md-12">
+                                <label>Score</label>
+                                <select class="form-control" aria-label="Default select example" name="score" id="score">
+                                    <option selected value="<?= $dv['score']; ?>"><?= $dv['score']; ?></option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
                                 </select>
                             </div>
 

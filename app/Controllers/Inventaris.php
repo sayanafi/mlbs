@@ -83,10 +83,21 @@ class Inventaris extends BaseController
             'merk' => $this->request->getVar('merk'),
             'bahan' => $this->request->getVar('bahan'),
             'jumlah' => $this->request->getVar('jumlah'),
-            'score' => $this->request->getVar('score'),
             'unit_id' => $this->request->getVar('units')
         ])) {
             session()->setFlashdata('user', 'Mengupdate Inventaris');
+            return redirect()->to(base_url('inventaris'));
+        }
+    }
+
+    public function nilaiInventaris($id)
+    {
+        //Validasi Form
+        if ($this->inventarisModel->save([
+            'id' => $id,
+            'score' => $this->request->getVar('score')
+        ])) {
+            session()->setFlashdata('user', 'Nilai Inventaris');
             return redirect()->to(base_url('inventaris'));
         }
     }
